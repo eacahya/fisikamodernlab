@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fisika Modern Lab</title>
+<meta name="theme-color" content="#1f4e79">
+<script src="data.js"></script>
+<script src="kunci.js"></script>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{--bg:#fbfaf7;--surface:#fff;--ink:#1d2330;--muted:#5b6474;--line:#e2ded3;--accent:#1f4e79;--accent-ink:#fff;
+  --accent-soft:#e6eef6;--gold:#b5651d;--gold-soft:#f8ecdf;--warn:#9b2c2c;--hero:#1f4e79;--hero2:#163a5c}
+:root[data-theme="dark"]{--bg:#12151b;--surface:#1a1e26;--ink:#e7e9ee;--muted:#a2aab8;--line:#2f3542;--accent:#8cb8e6;--accent-ink:#12151b;
+  --accent-soft:#1f2b3b;--gold:#e2a266;--gold-soft:#33271c;--warn:#f09a9a;--hero:#163a5c;--hero2:#10283f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12151b;--surface:#1a1e26;--ink:#e7e9ee;--muted:#a2aab8;--line:#2f3542;--accent:#8cb8e6;--accent-ink:#12151b;
+  --accent-soft:#1f2b3b;--gold:#e2a266;--gold-soft:#33271c;--warn:#f09a9a;--hero:#163a5c;--hero2:#10283f}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+button,input{font:inherit}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 48px}
+.hero{background:linear-gradient(160deg,var(--hero),var(--hero2));color:#fff;padding:22px 0 64px}
+.hero .wrap{padding-bottom:0}
+.brand{display:flex;align-items:center;gap:12px}
+.brand svg{flex:none}
+.brand{padding-right:52px}.brand h1{margin:0;font-size:24px;letter-spacing:.01em;line-height:1.2}
+.brand p{margin:0;font-size:13px;opacity:.85}
+.book{margin:16px 0 0;font-size:15px;opacity:.95}
+.book b{display:block;font-size:18px;font-family:"Source Serif 4",Georgia,serif}
+.top-tools{position:absolute;top:14px;right:14px;display:flex;gap:6px}
+.icon-btn{width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.16);color:#fff;cursor:pointer;display:grid;place-items:center}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.open{margin-top:-46px}
+.open h2{margin:0 0 4px;font-size:17px}
+.open p{margin:0 0 12px;color:var(--muted);font-size:14px}
+.row{display:flex;gap:8px}
+.row input{flex:1;min-width:0;height:48px;border:1.5px solid var(--line);border-radius:12px;padding:0 14px;background:var(--bg);color:var(--ink);font-size:18px;letter-spacing:.04em}
+.row input:focus{outline:none;border-color:var(--accent)}
+.btn{height:48px;border:0;border-radius:12px;padding:0 18px;background:var(--accent);color:var(--accent-ink);font-weight:700;cursor:pointer}
+.btn.alt{background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;gap:8px;justify-content:center;width:100%;margin-top:10px}
+.msg{min-height:20px;margin-top:8px;font-size:14px;color:var(--warn)}
+.recent{margin-top:4px;display:flex;flex-wrap:wrap;gap:6px}
+.vols{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin:22px 0 0;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:4px}
+.vols button{border:0;border-radius:9px;padding:10px 8px;background:none;color:var(--muted);font-weight:700;font-size:14px;cursor:pointer}
+.vols button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+.chip{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:5px 11px;font-size:13px;cursor:pointer}
+.part{margin:28px 0 10px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+details.ch{background:var(--surface);border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden}
+details.ch>summary{list-style:none;display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer}
+details.ch>summary::-webkit-details-marker{display:none}
+.num{flex:none;width:38px;height:38px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:700}
+.ch-t{flex:1;min-width:0}
+.ch-t b{display:block;line-height:1.3}
+.ch-t span{font-size:13px;color:var(--muted)}
+.chev{flex:none;color:var(--muted);transition:transform .2s}
+details[open] .chev{transform:rotate(90deg)}
+.list{border-top:1px solid var(--line)}
+.item{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:12px 16px;color:var(--ink);cursor:pointer}
+.item:last-child{border-bottom:0}
+.item:active{background:var(--accent-soft)}
+.code{flex:none;min-width:48px;padding:3px 0;border-radius:8px;background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:14px;text-align:center}
+.code.q{background:var(--gold-soft);color:var(--gold)}
+.code.r{background:var(--bg);color:var(--muted);border:1px solid var(--line)}
+.it b{display:block;font-weight:600;line-height:1.3}
+.it span{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.it i{display:block;font-style:normal;font-size:12px;color:var(--accent);margin-top:3px}
+.about{margin-top:28px;font-size:14px;color:var(--muted)}
+.about h3{color:var(--ink);font-size:16px;margin:0 0 6px}
+.about p{margin:0 0 8px}
+.about a{color:var(--accent)}
+/* pemindai QR */
+.scan{position:fixed;inset:0;background:#000;z-index:100;display:none;flex-direction:column}
+.scan.on{display:flex}
+.scan video{flex:1;width:100%;object-fit:cover;min-height:0}
+.scan .frame{position:absolute;left:50%;top:45%;width:min(64vw,280px);aspect-ratio:1;transform:translate(-50%,-50%);
+  border:3px solid rgba(255,255,255,.9);border-radius:18px;box-shadow:0 0 0 100vmax rgba(0,0,0,.45)}
+.scan .bottom{position:absolute;left:0;right:0;bottom:0;padding:20px 16px calc(20px + env(safe-area-inset-bottom));text-align:center;color:#fff}
+.scan .bottom p{margin:0 0 12px;font-size:15px}
+.scan .btn{background:#fff;color:#111}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="wrap" style="position:relative">
+    <div class="top-tools">
+      <button class="icon-btn" id="themeBtn" aria-label="Ganti tema">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    </div>
+    <div class="brand">
+      <svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="#fff" stroke-width="2.2"><ellipse cx="24" cy="24" rx="20" ry="7.5"/><ellipse cx="24" cy="24" rx="20" ry="7.5" transform="rotate(60 24 24)"/><ellipse cx="24" cy="24" rx="20" ry="7.5" transform="rotate(120 24 24)"/></g><circle cx="24" cy="24" r="4" fill="#f2b36b"/><circle cx="44" cy="24" r="2.4" fill="#f2b36b"/></svg>
+      <div><h1>Fisika Modern Lab</h1><p>Simulasi pendamping buku</p></div>
+    </div>
+    <p class="book"><b id="bookTitle"></b><span id="bookSub"></span></p>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="card open">
+    <h2>Buka simulasi dari buku</h2>
+    <p>Ketik kode pada kotak SIM di buku, misalnya <b>4.3</b> atau <b>10.6</b>, atau pindai kode QR-nya.</p>
+    <form class="row" id="codeForm" autocomplete="off">
+      <input id="code" inputmode="text" autocapitalize="characters" placeholder="Kode SIM" aria-label="Kode SIM" maxlength="10">
+      <button class="btn" type="submit">Buka</button>
+    </form>
+    <div class="msg" id="msg" role="status"></div>
+    <div class="recent" id="recent"></div>
+    <button class="btn alt" id="scanBtn" type="button">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M7 12h10"/></svg>
+      Pindai kode QR
+    </button>
+  </div>
+  <div id="chapters"></div>
+
+  <div class="about card" id="tentang">
+    <h3>Tentang aplikasi</h3>
+    <p id="aboutText"></p>
+    <p>Semua simulasi berjalan tanpa internet. Kode SIM sama dengan kotak SIM dan kode QR di buku; tiap simulasi juga dapat dibuka dari daftar bab di atas. Simulasi bertanda tab memiliki Lembar Kerja di tab terakhirnya.</p>
+    <p id="version"></p>
+  </div>
+</div>
+
+<div class="scan" id="scan" aria-modal="true" role="dialog">
+  <video id="video" playsinline muted></video>
+  <div class="frame"></div>
+  <div class="bottom">
+    <p id="scanMsg">Arahkan kamera ke kode QR pada kotak SIM.</p>
+    <button class="btn" id="scanClose" type="button">Tutup</button>
+  </div>
+</div>
+<canvas id="cv" hidden></canvas>
+
+<script src="beranda.js"></script>
+</body>
+</html>

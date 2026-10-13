@@ -1,0 +1,21 @@
+/* Fisika Modern Lab: bilah atas dan navigasi di halaman materi/simulasi */
+.fm-bar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:10px;
+  padding:10px 16px;background:#1f4e79;color:#fff;box-shadow:0 1px 6px rgba(0,0,0,.18)}
+:root[data-theme="dark"] .fm-bar{background:#163a5c}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .fm-bar{background:#163a5c}}
+.fm-back{flex:none;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.16);
+  color:#fff;font-size:28px;line-height:36px;cursor:pointer;padding:0}
+.fm-back:active{background:rgba(255,255,255,.3)}
+.fm-title{display:flex;flex-direction:column;min-width:0;line-height:1.25}
+.fm-title b{font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fm-code{font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.85}
+.fm-info{margin:14px 0 4px}
+.fm-info p{margin:0 0 6px}
+.fm-ref{display:inline-block;font-size:13px;font-weight:600;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:3px 10px}
+.fm-desc{color:var(--muted);font-size:15px}
+.fm-nav{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 40px}
+.fm-btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;
+  padding:10px 14px;font:inherit;font-size:15px;cursor:pointer;min-height:44px}
+.fm-btn:active{background:var(--accent-soft)}
+html.fm-app nav.tabs{top:60px}
+html.fm-app section{scroll-margin-top:70px}
